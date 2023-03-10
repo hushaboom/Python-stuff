@@ -1,0 +1,12 @@
+- Mon Assis -  by hushaboom
+
+Conky clone...
+This is just a lightweight system monitor which displays cpu, memory, and hdd usage info.  Work in progress.
+Works on Ubuntu Mate 22.10
+
+To use, make monAssis.py executable with: 
+chmod +x monAssis.py 
+and run it from terminal:
+./monAssis.py & disown
+or drag the file icon to your mate-panel and just click on it!
+
