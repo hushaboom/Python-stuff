@@ -118,6 +118,4 @@ def driveStr ():
 
      return ldStr,drStr
 
-def dumpMem():
-     rstr = 'sudo /home/robb/memdm'
-     run(rstr, shell=True)
+
