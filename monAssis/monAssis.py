@@ -145,5 +145,5 @@ if __name__ == '__main__':
     app = Top(None)
     app.title(' - Mon Assis -')
     app.resizable(0,0)
-    app.geometry('510x920')
+    app.geometry('502x920')
     app.mainloop()
