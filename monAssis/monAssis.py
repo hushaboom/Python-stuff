@@ -53,9 +53,9 @@ class Top(Tk):
         cachebar.grid(column=1,row=7)
         cachebar['value'] = 0
 
-        if os.geteuid() == 0: # check if program is run as root
-            button = Button(self.topFrame, width=6, text='Drop', command=lambda: dumpMem())
-            button.grid(row=8,column=0,sticky='N')
+        
+        button = Button(self.topFrame, width=6, text='Drop', command=lambda: dumpMem())
+        button.grid(row=8,column=0,sticky='N')
             
 
         procFrame = LabelFrame(self,text=u'Top Processes',width='400')
