@@ -12,6 +12,8 @@ class Top(Tk):
         Tk.__init__(self, parent)
         self.parent = parent
 
+        self.grid_propagate(False)
+
         self.coreFrame = LabelFrame(self,text=u'CPU Usage')
         self.coreFrame.grid(row=0, column=0, padx=5, pady=15, sticky='N', columnspan=3)
         self.topFrame = LabelFrame(self,text=u'Memory')
@@ -51,6 +53,11 @@ class Top(Tk):
         cachebar.grid(column=1,row=7)
         cachebar['value'] = 0
 
+        if os.geteuid() == 0: # check if program is run as root
+            button = Button(self.topFrame, width=6, text='Drop', command=lambda: dumpMem())
+            button.grid(row=8,column=0,sticky='N')
+            
+
         procFrame = LabelFrame(self,text=u'Top Processes',width='400')
         procFrame.grid(row=3, column=0, padx=25, pady=5, columnspan=3, sticky='N')
         procLabel = Label(procFrame,text="Top Processes")
@@ -62,14 +69,8 @@ class Top(Tk):
         temp.grid(padx=5, pady=5)
 
         labelhd = Label(self.coreFrame,text="Label")
-        labelhd.grid(column=0,row=14,sticky='SE',columnspan=3)
-        '''
-        labelK = Label(self.coreFrame,text="Label")
-        labelK.grid(column=1,row=15,sticky='N')
-        kbar = Progressbar(self.coreFrame,length=100,maximum=100,mode='determinate')
-        kbar.grid(column=1,row=15,sticky='N')
-        kbar['value'] = 0
-        '''
+        labelhd.grid(column=0,row=14,sticky='SE',columnspan=3,padx=5)
+       
         labelD = Label(self.coreFrame,text="Label")
         labelD.grid(column=0,row=0, columnspan=3, sticky='N')
 
@@ -99,19 +100,17 @@ class Top(Tk):
             cacfree = float(cacstr.split()[1][:-1])
             memlabel['text'] = strn+'%'
             membar['value'] = percent
-            memlabelB['text'] = ' %.2f Gb'%(float(memGrab()[3][0])/1000000)
+            memlabelB['text'] = ' %03.2f Gb'%(float(memGrab()[3][0])/1000000)
             freeLabel['text'] = freestr+'%'
             freebar['value'] = perfree
-            freeLabelB['text'] = ' %.2f Gb'%(float(memGrab()[3][1])/1000000)
+            freeLabelB['text'] = ' %03.2f Gb'%(float(memGrab()[3][1])/1000000)
             cacheLabel['text'] = cacstr+'%'
             cachebar['value'] = cacfree
-            cacheLabelB['text'] = ' %.2f Gb'%(float(memGrab()[3][2])/1000000)
+            cacheLabelB['text'] = ' %03.2f Gb'%(float(memGrab()[3][2])/1000000)
             procLabel['text'] = brst+'\n%s'%sysInfo()+brst
             temp['text'] = coreTemp()
-            #labelK['text'] = '\n'+'CPU Load: %.2f'%(float(hdd()[1]))+'%'
             labelhd['text'] = brst+'\n%s%s\nDiskIO: \n%s%s'%(driveStr()[0], brst, driveStr()[1],brst)
             labelD['text'] = brst+'\n'+utc()+'\n'+brst
-            #kbar['value'] = float(hdd()[1])
 
             data = freqOut(cpuCounter())
             cpu = list(data.keys())
@@ -146,4 +145,5 @@ if __name__ == '__main__':
     app = Top(None)
     app.title(' - Mon Assis -')
     app.resizable(0,0)
+    app.geometry('510x920')
     app.mainloop()

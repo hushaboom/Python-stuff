@@ -49,9 +49,9 @@ def memGrab():
     pout.append(p[4])
 
     used,free,cache = pout[0],pout[1],pout[2]
-    strn = ' Used: %.2f' % ((float(used)/float(p[0]))*100)
-    stfree = ' Free: %.2f' % (float(free)/float(p[0])*100)
-    cacfree = 'Cache: %.2f' % ((float(cache)/float(p[0]))*100)
+    strn = ' Used: %04.2f' % ((float(used)/float(p[0]))*100)
+    stfree = ' Free: %04.2f' % (float(free)/float(p[0])*100)
+    cacfree = 'Cache: %04.2f' % ((float(cache)/float(p[0]))*100)
     return strn,stfree,cacfree,(pout[0],pout[1],pout[2])
 
 def utc():
@@ -109,7 +109,12 @@ def driveStr ():
           ldStr += '{0:<8} {1:<8} {2:<8} {3:<8} {4:<8} {5:<8}\n'.format(*i)
 
      for i in (drHold[0], drHold[1], drHold[-1]):
-          drStr += '{0:<8} {1:<8} {2:<10} {3:<10} {5:<10} {6:<10}\n'.format(*i)
+          if i[0] == 'sda':
+               drStr += '{0:<5} {1:>8} {2:>10} {3:>10} {5:>10} {6:>10}\n'.format(*i)
+          elif i[0] == 'sda2':
+               drStr += '{0:<3} {1:>8} {2:>10} {3:>10} {5:>10} {6:>10}\n'.format(*i)
+          else:
+               drStr += '{0:<8} {1:<8} {2:<10} {3:<10} {5:<10} {6:<10}\n'.format(*i)
 
      return ldStr,drStr
 
@@ -118,3 +123,6 @@ def dumpMem():
      os.environ ['DISPLAY'] = ':0'
      os.environ ['XAUTHORITY'] = '/home/your_user/.Xauthority'
      run(rstr, shell=True)
+
+b = ' %04.2f Gb'%(float(memGrab()[3][2])/1000000)
+print(b)
