@@ -119,10 +119,5 @@ def driveStr ():
      return ldStr,drStr
 
 def dumpMem():
-     rstr = 'sysctl vm.drop_caches=1'
-     os.environ ['DISPLAY'] = ':0'
-     os.environ ['XAUTHORITY'] = '/home/your_user/.Xauthority'
+     rstr = 'sudo /home/robb/memdm'
      run(rstr, shell=True)
-
-b = ' %04.2f Gb'%(float(memGrab()[3][2])/1000000)
-print(b)
