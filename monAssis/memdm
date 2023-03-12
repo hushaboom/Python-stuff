@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sysctl vm.drop_caches=1
