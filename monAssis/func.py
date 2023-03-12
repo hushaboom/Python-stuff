@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 from subprocess import check_output, run
 import matplotlib.pyplot as plt
@@ -118,4 +118,6 @@ def driveStr ():
 
      return ldStr,drStr
 
-
+def dumpMem():
+     rstr = 'pkexec /home/robb/memdm'
+     run(rstr, shell=True)

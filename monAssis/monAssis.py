@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 from tkinter import *
 from tkinter.ttk import Progressbar
@@ -9,7 +9,7 @@ class Top(Tk):
 
     def __init__(self, parent):
 
-        Tk.__init__(self, parent)
+        Tk.__init__(self, parent, className='monAssis')
         self.parent = parent
 
         self.grid_propagate(False)
@@ -53,6 +53,9 @@ class Top(Tk):
         cachebar.grid(column=1,row=7)
         cachebar['value'] = 0
 
+        dropbutton = Button(self.topFrame, width=6, text='Drop', command=lambda: dumpMem())
+        dropbutton.grid(row=8,column=0,sticky='N')
+        
         procFrame = LabelFrame(self,text=u'Top Processes',width='400')
         procFrame.grid(row=3, column=0, padx=25, pady=5, columnspan=3, sticky='N')
         procLabel = Label(procFrame,text="Top Processes")
